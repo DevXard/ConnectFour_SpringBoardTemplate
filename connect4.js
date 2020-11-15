@@ -165,9 +165,9 @@ function checkForWin() {
     // this function wil return true if 4 cells of any template are >= to 0
     return cells.every(
       ([y, x]) =>
-        y >= 1 &&
+        y >= 0 &&
         y < HEIGHT &&
-        x >= 1 &&
+        x >= 0 &&
         x < WIDTH &&
         board[y][x] === currPlayer
     );
@@ -185,9 +185,11 @@ function checkForWin() {
       let diagDR = [[y, x], [y + 1, x + 1], [y + 2, x + 2], [y + 3, x + 3]];
       // diagDL gives template for win from cur location going left and up
       let diagDL = [[y, x], [y + 1, x - 1], [y + 2, x - 2], [y + 3, x - 3]];
+      //reverse vertical gives a template of vertical win going fromright to left
+      let vertReverce = [[y, x], [y - 1, x], [y - 2, x], [y - 3, x]];
 
       //compares the template scenarios of a win to the main board where the game is hapening
-      if (_win(horiz) || _win(vert) || _win(diagDR) || _win(diagDL)) {
+      if (_win(horiz) || _win(vert) || _win(diagDR) || _win(diagDL) || _win(vertReverce)) {
         return true;
       }
     }
